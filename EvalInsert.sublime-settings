@@ -1,0 +1,10 @@
+{
+    // List of strings representing modules to import.
+    "import": [],
+    // List of commands to display in the menu. For an details about each entry,
+    // see the README.
+    "commands": [{
+        "name": "Selection as command",
+        "command": "_0"
+    }]
+}

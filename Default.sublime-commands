@@ -1,0 +1,9 @@
+[
+    {
+        "caption": "EvalInsert: EvalInsert Menu",
+        "command": "eval_insert_menu"
+    }, {
+        "caption": "EvalInsert: EvalInsert Input Panel",
+        "command": "eval_insert"
+    }
+]
