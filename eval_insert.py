@@ -14,7 +14,7 @@ class EvalInsertCommand(sublime_plugin.TextCommand):
         self.num_regions = len(cursors)
 
         for index in range(self.num_regions):
-            view.add_regions("%s%s" % (self.region_key_prefix, index), [cursors[index]])
+            view.add_regions("%s%s" % (self.region_key_prefix, index), [cursors[index]], "")
         if eval_string is None:
             input_view = window.show_input_panel("Enter evaluation string", "", self.execute_insert, None, self.erase_regions)
         else:

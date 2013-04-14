@@ -6,7 +6,7 @@ Plugin to execute and insert python code into the buffer.
 
 ## Installation
 
-Note with either method, you may need to restart Sublime Text 2 for the plugin to load.
+Note with either method, you may need to restart the editor for the plugin to load.
 
 ### Package Control
 Installation through [Package Control](http://wbond.net/sublime_packages/package_control) is recommended. It will handle updating your packages as they become available. To install, do the following.
