@@ -41,13 +41,19 @@ class EvalInsertCommand(sublime_plugin.TextCommand):
             replace_variable = view.substr(cursor)
 
             temp_input = re.sub(r"\b_0\b", replace_variable, temp_input)
+            temp_input = re.sub(r"\b_index\b", str(index), temp_input)
 
             eval_global = {}
             for import_string in self.settings.get("import", []):
                 eval_global[import_string] = __import__(import_string)
             result = None
+            exec_statement = False
             try:
-                eval_statement = compile(temp_input, '<string>', 'eval')
+                if len(temp_input.split("\n")) > 1:
+                    exec_statement = True
+                    eval_statement = compile(temp_input, '<string>', 'exec')
+                else:
+                    eval_statement = compile(temp_input, '<string>', 'eval')
             except SyntaxError:
                 traceback.print_exc()
                 print("EvalInsert: Error evaluating cursor %s" % index)
@@ -55,7 +61,12 @@ class EvalInsertCommand(sublime_plugin.TextCommand):
                 result = view.substr(cursor)
 
             if result is None:
-                result = eval(eval_statement, eval_global)
+                if exec_statement:
+                    exec_map = {"result": None}
+                    eval(eval_statement, eval_global, exec_map)
+                    result = exec_map["result"]
+                else:
+                    result = eval(eval_statement, eval_global)
             replace_text.append(str(result))
 
         view.run_command("batch_replace", {"replace_text": replace_text, "region_key_prefix": self.region_key_prefix})

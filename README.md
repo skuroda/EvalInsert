@@ -2,7 +2,7 @@
 
 ## Overview
 
-Plugin to execute and insert python code into the buffer.
+Plugin to execute and insert content generated from a python statement into the buffer. Note that this plugin uses the built in python function `eval`. This is not a safe method to use in general. For more on that, see this [article](http://nedbatchelder.com/blog/201206/eval_really_is_dangerous.html). This is just a general warning about the method.
 
 ## Installation
 
@@ -64,4 +64,22 @@ An optional description of the command. This will be displayed in the menu along
 
 `command`:
 
-The python command to evaluate. `_0` will be replaced with the content of the current cursor. `_n` where `n` is the nth cursor from the top.
+The python command to evaluate. `_0` will be replaced with the content of the current cursor. `_n` where `n` is the nth cursor from the top. If a python script is more than a single statement, the value to be printed must be assigned to the `result` variable. In addition, `_index` will be replaced the cursor number.
+
+### Example Commands
+
+    {
+        "name": "Multiples of 10",
+        "description": "Insert multiples of 10 at each cursor starting at 0"
+        "command": "_index * 10"
+    }
+
+    {
+        "name": "Double cursor value",
+        "command": "_0 * 2"
+    }
+
+    {
+        "name": "Append firsts cursor text to all cursors",
+        "command": "'_0' + '_1'"
+    }
